@@ -1,5 +1,3 @@
-{-# LANGUAGE ScopedTypeVariables #-}
-
 module FindingSuccessInHaskell.Chapter01Spec (main, spec) where
 
 import Test.Hspec
@@ -25,7 +23,7 @@ spec = do
   describe "safeTail" $ do
     it "should return just the tail if it exists or nothing if not" $ do
       (safeTail [1, 2]) `shouldBe` (Just [2])
-      (safeTail []) `shouldBe` (Nothing :: Maybe Int)
+      (safeTail []) `shouldBe` (Nothing :: Maybe [Int])
   describe "safeHead" $ do
     it "should return just the head if it exists or nothing if not" $ do
       (safeHead [1, 2]) `shouldBe` (Just 1)
