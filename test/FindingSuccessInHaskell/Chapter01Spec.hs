@@ -1,9 +1,11 @@
+{-# LANGUAGE ScopedTypeVariables #-}
+
 module FindingSuccessInHaskell.Chapter01Spec (main, spec) where
 
 import Test.Hspec
 import Test.QuickCheck
 
-import FindingSuccessInHaskell.Chapter01 (absVal, validateUsernamePassword)
+import FindingSuccessInHaskell.Chapter01 (absVal, validateUsernamePassword, safeHead, safeTail)
 
 main :: IO ()
 main = hspec spec
@@ -20,5 +22,12 @@ spec = do
       (validateUsernamePassword "username" [])         `shouldBe` "Empty password"
       (validateUsernamePassword []         "password") `shouldBe` "Empty username"
       (validateUsernamePassword "username" "password") `shouldBe` "Okay"
-
+  describe "safeTail" $ do
+    it "should return just the tail if it exists or nothing if not" $ do
+      (safeTail [1, 2]) `shouldBe` (Just [2])
+      (safeTail []) `shouldBe` (Nothing :: Maybe Int)
+  describe "safeHead" $ do
+    it "should return just the head if it exists or nothing if not" $ do
+      (safeHead [1, 2]) `shouldBe` (Just 1)
+      (safeHead []) `shouldBe` (Nothing :: Maybe Int)
 

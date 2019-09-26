@@ -1,6 +1,8 @@
 module FindingSuccessInHaskell.Chapter01
   ( absVal,
-    validateUsernamePassword
+    validateUsernamePassword,
+    safeHead,
+    safeTail    
   ) where 
 
 import Data.List
@@ -12,8 +14,16 @@ absVal x = case (x < 0) of
 
 validateUsernamePassword :: String -> String -> String
 validateUsernamePassword username password =
-  if null username
-    then (if null password
-        then "Empty username and password"
-        else "Empty username")
-    else (if null password                                     then "Empty password" else "Okay")
+  case (null username, null password) of
+    (True, True) -> "Empty username and password"
+    (True, False) -> "Empty username"
+    (False, True) -> "Empty password"
+    (False, False) -> "Okay"
+
+safeTail :: [a] -> Maybe [a]
+safeTail (x:xs) = Just xs
+safeTail [] = Nothing
+
+safeHead :: [a] -> Maybe a
+safeHead (x:xs) = Just x
+safeHead [] = Nothing
