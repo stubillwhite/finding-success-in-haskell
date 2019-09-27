@@ -2,7 +2,8 @@ module FindingSuccessInHaskell.Chapter02
   ( isAnagram,
     isWord,
     checkAnagram,
-    isPalindrome
+    isPalindrome,
+    translateWord
   ) where
 
 import Data.List
@@ -43,3 +44,19 @@ main = do
 isPalindrome :: String -> Bool
 isPalindrome s =
   s == (reverse s)
+
+substituteChar :: Char -> Char
+substituteChar c =
+  case c of
+    'e' -> '3'
+    'o' -> '0'
+    x -> x
+
+translateWord :: String -> String
+translateWord s = map substituteChar s
+
+geekTranslator :: IO ()
+geekTranslator = do
+  putStr "Please enter a word.\n> "
+  word <- getLine
+  print (translateWord word)

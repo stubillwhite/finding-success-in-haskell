@@ -18,5 +18,6 @@ help:
 
 
 .PHONY: test 
-test: ## Generate burndown metrics
+test: ## Run the tests
+	@stack clean
 	@stack test
